@@ -6,12 +6,14 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import Index from "./pages/Index";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Index />} />
+        <Route path="/playground" element={<Dashboard />} />
         <Route path="*" element={<div>NOT FOUND</div>} />
       </Route>
     )

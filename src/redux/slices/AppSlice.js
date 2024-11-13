@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const appSlice = createSlice({
   name: "app",
   initialState: {
-    user: localStorage.getItem("USER"),
+    chats: localStorage.getItem("chats"),
     sidebarState: "closed",
     sidebarIndex: 0,
     currentPage: "dashboard",
@@ -12,10 +12,12 @@ export const appSlice = createSlice({
     loading: false,
   },
   reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
-      localStorage.setItem("USER", JSON.stringify(action.payload));
+    setChats: (state, action) => {
+      let value = JSON.stringify(action.payload);
+      state.chats = value;
+      localStorage.setItem("chats", value);
     },
+
     setSidebarState: (state, action) => {
       state.sidebarState = action.payload;
     },
@@ -40,7 +42,8 @@ export const appSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-  setUser,
+  setChats,
+
   setSidebarState,
   setCurrentPage,
   setSidebarIndex,

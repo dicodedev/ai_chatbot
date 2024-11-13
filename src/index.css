@@ -2,4 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #212021;
+}
 
+#root {
+  overflow: hidden;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.w-available {
+  width: -webkit-fill-available;
+}
