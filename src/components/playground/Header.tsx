@@ -58,7 +58,7 @@ export default function Header({
               <img src={AngleDown} />
             </div>
             {showLangDropDown && (
-              <div className="bg-[#212021] rounded-2 mt-2 absolute right-0 w-[9rem] ">
+              <div className="bg-[#212021] rounded-2 mt-2 z-50 absolute right-0 w-[9rem] ">
                 {languages.map((item: any, key: number) => (
                   <div
                     key={key}
@@ -66,7 +66,7 @@ export default function Header({
                       setLanguage(item);
                       setShowLangDropdown(false);
                     }}
-                    className="flex items-center hover:bg-[#444] cursor-pointer py-2 px-3 justify-between w-100"
+                    className="flex items-center hover:bg-[#444]  cursor-pointer py-2 px-3 justify-between w-100"
                   >
                     <img className="w-[25px] h-[15px]" src={getFlag(item)} />
                     <span className="text-white text-sm ml-2 mr-1">{item}</span>

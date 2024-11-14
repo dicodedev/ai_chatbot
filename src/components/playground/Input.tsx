@@ -38,7 +38,7 @@ export default function Input({
       });
   };
   return type == "big" ? (
-    <div className="flex items-start justify-between  fixed justify-self-center md:w-9/12 w-11/12 bottom-0  bg-white rounded-lg p-1 mt-3 mb-2 py-2">
+    <div className="flex items-start justify-between  fixed justify-self-center md:w-9/12 w-[calc(100%-3rem)] bottom-2 md:bottom-0  bg-white rounded-lg p-1 mt-3 mb-2 py-2">
       <svg
         width="26"
         height="26"
