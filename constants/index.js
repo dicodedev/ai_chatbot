@@ -10,3 +10,7 @@ export const COLORS = {
   DANGER: "#B12C1F",
   DANGER_LIGHT: "#FFE0DD",
 };
+
+export const CONFIG = {
+BASE_URL: 
+}
