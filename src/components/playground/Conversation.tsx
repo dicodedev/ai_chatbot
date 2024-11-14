@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ReactTyped } from "react-typed";
 import Input from "./Input";
-import Pusher from "pusher-js";
 import Loader from "react-loaders";
 
 interface Prop {
@@ -10,6 +9,7 @@ interface Prop {
   loading: boolean;
   setLoading: any;
   language: string;
+  pusher: any;
 }
 
 export default function Conversation({
@@ -18,6 +18,7 @@ export default function Conversation({
   loading,
   setLoading,
   language,
+  pusher,
 }: Prop) {
   const [animate, setAnimate] = useState(false);
 
@@ -30,21 +31,21 @@ export default function Conversation({
   };
 
   useEffect(() => {
-    const pusher = new Pusher("c1efe3a3474e7360b601", {
-      cluster: "eu",
-      encrypted: true,
-    });
-    const channel = pusher.subscribe("rooms");
-    channel.bind("message", (data: any) => {
-      setLoading(false);
-      setAnimate(true);
-      setChats((prev: any) => [...prev, data]);
-    });
-
     setInterval(() => {
       scrollToBottom();
     }, 2000);
   }, []);
+
+  useEffect(() => {
+    if (pusher) {
+      const channel = pusher.subscribe("rooms");
+      channel.bind("message", (data: any) => {
+        setLoading(false);
+        setAnimate(true);
+        setChats((prev: any) => [...prev, data]);
+      });
+    }
+  }, [pusher]);
 
   return (
     <div className="relative no-scrollbar overflow-y-scroll h-[calc(100vh-6rem)] mt-4">
