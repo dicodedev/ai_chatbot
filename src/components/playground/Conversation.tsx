@@ -20,8 +20,6 @@ export default function Conversation({
   language,
   pusher,
 }: Prop) {
-  const [animate, setAnimate] = useState(false);
-
   const messageEnd = useRef();
 
   const scrollToBottom = () => {
@@ -33,7 +31,7 @@ export default function Conversation({
   useEffect(() => {
     setInterval(() => {
       scrollToBottom();
-    }, 2000);
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -41,7 +39,6 @@ export default function Conversation({
       const channel = pusher.subscribe("rooms");
       channel.bind("message", (data: any) => {
         setLoading(false);
-        setAnimate(true);
         setChats((prev: any) => [...prev, data]);
       });
     }
@@ -68,7 +65,7 @@ export default function Conversation({
                 strokeLinejoin="round"
               />
             </svg>
-            {item.from_bot && animate ? (
+            {item.from_bot && key + 1 == chats.length ? (
               <ReactTyped
                 className="text-white ml-2 text-sm mb-2"
                 strings={[

@@ -51,7 +51,7 @@ export default function Header({
           <div className="relative">
             <div
               onClick={() => setShowLangDropdown(!showLangDropDown)}
-              className="flex cursor-pointer items-center border-1 rounded-lg p-2"
+              className="flex cursor-pointer items-center border rounded-lg p-2"
             >
               <img className="w-[25px] h-[15px]" src={getFlag(language)} />
               <span className="text-white text-sm ml-2 mr-1">{language}</span>
