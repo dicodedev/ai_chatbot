@@ -1,1 +1,1 @@
-# wura_admin
+# Lang AI
