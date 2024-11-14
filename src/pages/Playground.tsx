@@ -1,11 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import Logo from "../assets/icons/logo.svg";
-import Pusher from "pusher-js";
-import axios from "axios";
-import { ReactTyped } from "react-typed";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "react-loaders";
 import "../assets/css/loader.min.css";
 import { setChats } from "../redux/slices/AppSlice";
 import Header from "../components/playground/Header";
@@ -48,6 +42,7 @@ export default function Playground() {
           />
         ) : (
           <StartChat
+            loading={loading}
             language={language}
             setLoading={setLoading}
             setChats={_setChats}
