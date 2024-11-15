@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ReactTyped } from "react-typed";
+import { ReactTyped, Typed } from "react-typed";
 import Input from "./Input";
 import Loader from "react-loaders";
 
@@ -21,6 +21,8 @@ export default function Conversation({
   pusher,
 }: Prop) {
   const messageEnd = useRef();
+  const [typeSpeed, settypeSpeed] = useState(50);
+  const [lastMessage, setLastMessage] = useState<any>(null);
 
   const scrollToBottom = () => {
     if (messageEnd.current) {
@@ -29,10 +31,31 @@ export default function Conversation({
   };
 
   useEffect(() => {
-    setInterval(() => {
-      scrollToBottom();
-    }, 1000);
-  }, []);
+    let chat_length = chats.length;
+    if (chat_length) {
+      let last_item = chats[chats.length - 1];
+      let message = last_item.message;
+      setLastMessage(message);
+    }
+  }, [chats]);
+
+  useEffect(() => {
+    if (!lastMessage) return;
+
+    let message_length = lastMessage.length + lastMessage.length / 2;
+    let type_index = 0;
+
+    let intervalId = setInterval(() => {
+      if (type_index < message_length) {
+        scrollToBottom();
+        type_index++;
+      } else {
+        setLastMessage(null);
+      }
+    }, typeSpeed);
+
+    return () => clearInterval(intervalId);
+  }, [lastMessage]);
 
   useEffect(() => {
     if (pusher) {
@@ -46,7 +69,7 @@ export default function Conversation({
 
   return (
     <div className="relative no-scrollbar overflow-y-scroll h-[calc(100vh-6rem)] mt-4">
-      <div onChange={() => console.log("changed")} className="w-100 pb-[5rem]">
+      <div className="w-100 pb-[5rem]">
         {chats.map((item: any, key: number) => (
           <div key={key} className={"flex mb-" + (item.from_bot ? "4" : "2")}>
             <svg
@@ -72,8 +95,7 @@ export default function Conversation({
                   item.message.replace("\n\n", "").replaceAll("\n", "<br/>"),
                 ]}
                 showCursor={false}
-                typeSpeed={5}
-                parseRef={(ref) => console.log(ref.current.input)}
+                typeSpeed={typeSpeed}
               />
             ) : (
               <p
